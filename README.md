@@ -1,5 +1,5 @@
 <h1 align="center">
- ✨ こんにちは  ✨
+ ✨ こんちゃ  ✨
 </h1>
 
 ## 🌐 Socials:
