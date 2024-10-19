@@ -1,0 +1,56 @@
+﻿body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif; /* Dodano domyślną czcionkę */
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; /* Czarne tło */
+    display: flex;
+    justify-content: center; /* Wyśrodkowuje tekst */
+    align-items: center; /* Wyśrodkowuje tekst pionowo */
+    color: white; /* Ustawia kolor tekstu na biały */
+    font-size: 3em; /* Ustawia rozmiar czcionki */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5); /* Neonowy efekt */
+}
+
+.userContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.username, .userStatus {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.socialsWrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.social {
+    margin: 10px;
+    fill: white;
+}
+
+    .social:hover {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5);
+    }
