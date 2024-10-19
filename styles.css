@@ -4,7 +4,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif; /* Dodano domyślną czcionkę */
+    font-family: Arial, sans-serif;
 }
 
 #overlay {
@@ -13,13 +13,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black; /* Czarne tło */
+    background-color: black; 
     display: flex;
-    justify-content: center; /* Wyśrodkowuje tekst */
-    align-items: center; /* Wyśrodkowuje tekst pionowo */
-    color: white; /* Ustawia kolor tekstu na biały */
-    font-size: 3em; /* Ustawia rozmiar czcionki */
-    text-shadow: 0 0 5px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5); /* Neonowy efekt */
+    justify-content: center; 
+    align-items: center;
+    color: white;
+    font-size: 3em;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .userContainer {
