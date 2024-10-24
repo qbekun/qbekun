@@ -1,3 +1,5 @@
+![Preview](./bg.webp)
+
 <h1 align="center">
  ✨ こんちゃ  ✨
 </h1>
