@@ -4,10 +4,8 @@
     let direction = 1;
 
     function updateTitle() {
-        // Zmiana tytułu na podstawie indeksu
         document.title = titleText.substring(0, index);
 
-        // Zmiana indeksu
         if (direction === 1) {
             index++;
             if (index > titleText.length) {
