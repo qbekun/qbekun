@@ -10,11 +10,11 @@
 # 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=qbekun&theme=buefy&show_icons=true&hide_border=true&layout=compact)
 
+[![Discord Presence](https://lanyard.cnrad.dev/api/616018262890905611)](https://discord.com/users/616018262890905611)
+
 ## **🧋Cutie Counter**
 <a href="https://discord.com/users/616018262890905611"><img align="right" width=400 src="https://moe-counter.glitch.me/get/@qbekun?theme=rule34"></a>
 <a href="https://github.com/qbekun"><img align="left" width="100" src="./mahiro.png"></a>
-
-[![Discord Presence](https://lanyard.cnrad.dev/api/616018262890905611)](https://discord.com/users/616018262890905611)
 
 ```yaml
 People who visit my profile :3.
