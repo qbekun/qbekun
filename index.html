@@ -86,13 +86,14 @@
       </style>
    </head>
    <body>
-        <div id="welcome-screen">Click to enter...</div>
-      <div id="page">
-                <audio autoplay>
-         <source src = "assets/audio/bunny_girl_senpai.mp3" type ="audio/mp3" loop></audio>
-       </audio>
+    <div id="welcome-screen">Click to enter...</div>
+	   
+    <div id="page" style="display:none;">
+        <audio id="background-music" loop>
+            <source src="assets/audio/bunny_girl_senpai.mp3" type="audio/mp3">
+        </audio>
+
         <canvas id="canvas"></canvas>
-      <div id="preloader"></div>
 <div class="edrea_tm_all_wrap" data-magic-cursor="show" data-enter="fadeInUp" data-exit>
       <div id="primary" class="content-area">
          <div id="primary-background">
@@ -228,10 +229,6 @@
       <div class="pswp__counter"></div>
       <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
       <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <div class="pswp__preloader">
-      <div class="pswp__preloader__icn">
-      <div class="pswp__preloader__cut">
-      <div class="pswp__preloader__donut"></div>
       <div class="mouse-cursor cursor-outer"></div>
       <div class="mouse-cursor cursor-inner"></div>
       </div>
