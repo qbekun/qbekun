@@ -654,7 +654,6 @@ body{
 }
 .wrap{
     position:relative;
-    z-index: 0;
     width:100%;
     min-height:568px;
     padding:16px;
@@ -743,24 +742,12 @@ body{
     width:100%;
     height:100%
 }
-.layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.layer video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+.layer{
+    width:100%;
+    height:100%;
+    background-image:url(https://files.catbox.moe/p1k5mz.mp4);
+    background-size:cover;
+    background-position:center
 }
 canvas{
     width:100%;
