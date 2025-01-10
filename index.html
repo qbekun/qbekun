@@ -5,10 +5,25 @@
       <link href="css/main.css" rel="stylesheet">
       <link href="css/type.css" rel="stylesheet">
        <link rel="stylesheet" href="css/all.css">
-	<audio autoplay>
-         <source src = "assets/audio/bunny_girl_senpai.mp3" type ="audio/mp3" loop></audio>
-       </audio>
       <style>
+	      #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 9999;
+            cursor: pointer;
+        }
+        #page {
+            display: none;
+        }
          #stars {
          width: 1px;
          height: 1px;
@@ -69,6 +84,10 @@
             outline:none;
          }
       </style>
+	<div id="welcome-screen">Click to enter...</div>
+		<audio autoplay>
+         <source src = "assets/audio/bunny_girl_senpai.mp3" type ="audio/mp3" loop></audio>
+       </audio>
    </head>
    <body>
       <div id="page">
