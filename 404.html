@@ -3,27 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="foreversadboys">
+    <meta name="author" content="qbekun">
     <title>??? | Coming Soon</title>
+    <link rel="icon" href="https://foreversadboys.ovh/1.png">
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #0f0f0f;
             font-family: Arial, sans-serif;
+            color: #ccc;
+            text-align: center;
         }
         .message {
-            font-size: 4em; 
+            font-size: 3em; 
             font-weight: bold;
-            text-transform: uppercase;
-            color: #333; 
-            text-align: center;
+            margin-bottom: 20px;
+            animation: fade-in-out 3s infinite;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #0f0f0f;
+            background-color: #ccc;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+            animation: pulse 2s infinite;
+        }
+        .btn:hover {
+            background-color: #555;
+            color: #fff;
+            transform: scale(1.1);
+        }
+        @keyframes fade-in-out {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
     </style>
 </head>
 <body>
     <div class="message">Coming Soon!</div>
+    <a href="/" class="btn">Return to Home</a>
 </body>
 </html>
