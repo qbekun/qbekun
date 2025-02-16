@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: 'Comic Sans MS', sans-serif;
-      background-color: #ffebf0;
+      background-color: #ffe6f2;
       margin: 0;
       padding: 0;
       display: flex;
@@ -19,27 +19,37 @@
       color: #6b4f47;
     }
 
+    h1 {
+      color: #ff66b2;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
     #tag-form {
       position: absolute;
       top: 20px;
       left: 20px;
       display: flex;
-      gap: 15px;
+      gap: 10px;
       align-items: center;
+      background-color: #ffe0f7;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     #tag-form input {
       padding: 12px;
       font-size: 16px;
       border-radius: 10px;
-      border: 1px solid #fcbf77;
+      border: 1px solid #ff99cc;
       background-color: #fff8e1;
       color: #6b4f47;
     }
 
     #tag-form button {
       padding: 12px 20px;
-      background-color: #ff6f61;
+      background-color: #ff66b2;
       color: white;
       border: none;
       border-radius: 10px;
@@ -48,13 +58,19 @@
     }
 
     #tag-form button:hover {
-      background-color: #ff4a3d;
+      background-color: #ff3385;
     }
 
     .r18-label {
       font-size: 16px;
-      color: #ff6f61;
+      color: #ff66b2;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .r18-label input {
+      margin-right: 10px;
     }
 
     #images-container {
@@ -144,14 +160,12 @@
   <h1>Welcome to the Forever Sad Boys Gallery</h1>
   
   <form id="tag-form">
-    <label for="tags">Tags:</label>
-    <input type="text" id="tags" name="tags" placeholder="genshinimpact, hutao">
+    <label class="r18-label">
+      <input type="checkbox" id="r18Check"> Show R18 Content
+    </label>
+    <input type="text" id="tags" name="tags" placeholder="e.g., genshinimpact, hutao">
     <button type="submit">Search</button>
   </form>
-
-  <label class="r18-label">
-    <input type="checkbox" id="r18Check"> Show R18 Content
-  </label>
 
   <div id="images-container">
   </div>
@@ -163,7 +177,7 @@
   <script>
     function getQueryParams() {
       const urlParams = new URLSearchParams(window.location.search);
-      const r18 = urlParams.get('r18') || '0';
+      const r18 = urlParams.get('r18') || '0'; 
       const tags = urlParams.getAll('tag');
       return { r18, tags };
     }
@@ -235,6 +249,14 @@
       loadImages(r18, tags);
     }
 
+    function toggleR18Param() {
+      const r18Check = document.getElementById('r18Check');
+      const r18Value = r18Check.checked ? '1' : '0';
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set('r18', r18Value);
+      window.history.replaceState({}, '', '?' + urlParams.toString());
+    }
+
     function showOverlay(imageUrl) {
       const overlay = document.getElementById('overlay');
       const overlayImg = document.getElementById('overlay-img');
@@ -258,6 +280,10 @@
 
       const overlay = document.getElementById('overlay');
       overlay.addEventListener('click', closeOverlay);
+
+      const r18Check = document.getElementById('r18Check');
+      r18Check.checked = r18 === '1';
+      r18Check.addEventListener('change', toggleR18Param);
     }
 
     window.onload = init;
