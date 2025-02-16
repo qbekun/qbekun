@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>foreversadboys.ovh</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f8f8;
+      font-family: 'Comic Sans MS', sans-serif;
+      background-color: #ffebf0;
       margin: 0;
       padding: 0;
       display: flex;
@@ -16,6 +16,7 @@
       height: 100vh;
       flex-direction: column;
       text-align: center;
+      color: #6b4f47;
     }
 
     #tag-form {
@@ -23,28 +24,37 @@
       top: 20px;
       left: 20px;
       display: flex;
-      gap: 10px;
+      gap: 15px;
       align-items: center;
     }
 
     #tag-form input {
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      border-radius: 10px;
+      border: 1px solid #fcbf77;
+      background-color: #fff8e1;
+      color: #6b4f47;
     }
 
     #tag-form button {
-      padding: 10px 20px;
-      background-color: #6200ea;
+      padding: 12px 20px;
+      background-color: #ff6f61;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 16px;
     }
 
     #tag-form button:hover {
-      background-color: #3700b3;
+      background-color: #ff4a3d;
+    }
+
+    .r18-label {
+      font-size: 16px;
+      color: #ff6f61;
+      font-weight: bold;
     }
 
     #images-container {
@@ -58,17 +68,18 @@
 
     .image-card {
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 300px;
-      padding: 10px;
+      padding: 12px;
       text-align: center;
       overflow: hidden;
+      border: 2px solid #fcbf77;
     }
 
     .image-card img {
       max-width: 100%;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
       transition: transform 0.2s ease-in-out;
     }
@@ -79,7 +90,7 @@
 
     .image-details {
       margin-top: 10px;
-      color: #555;
+      color: #6b4f47;
     }
 
     .image-details span {
@@ -97,11 +108,12 @@
     }
 
     .tag-list span {
-      background-color: #f0f0f0;
-      padding: 3px 8px;
-      border-radius: 20px;
+      background-color: #fff2d0;
+      padding: 5px 10px;
+      border-radius: 15px;
       font-size: 12px;
-      color: #666;
+      color: #f87b99;
+      border: 1px solid #ff8a88;
     }
 
     .overlay {
@@ -129,17 +141,23 @@
   </style>
 </head>
 <body>
+  <h1>Welcome to the Forever Sad Boys Gallery</h1>
+  
   <form id="tag-form">
-    <label for="tags">Tagi:</label>
+    <label for="tags">Tags:</label>
     <input type="text" id="tags" name="tags" placeholder="genshinimpact, hutao">
-    <button type="submit">Wyszukaj</button>
+    <button type="submit">Search</button>
   </form>
+
+  <label class="r18-label">
+    <input type="checkbox" id="r18Check"> Show R18 Content
+  </label>
 
   <div id="images-container">
   </div>
 
   <div class="overlay" id="overlay">
-    <img id="overlay-img" src="" alt="Powiększony obraz">
+    <img id="overlay-img" src="" alt="Enlarged Image">
   </div>
 
   <script>
@@ -183,7 +201,7 @@
               detailsDiv.className = 'image-details';
 
               const authorSpan = document.createElement('span');
-              authorSpan.textContent = `Autor: ${image.author || 'Nieznany'}`;
+              authorSpan.textContent = `Author: ${image.author || 'Unknown'}`;
 
               const tagListDiv = document.createElement('div');
               tagListDiv.className = 'tag-list';
@@ -201,11 +219,11 @@
               imagesContainer.appendChild(imageCard);
             });
           } else {
-            imagesContainer.innerHTML = 'Brak obrazów do wyświetlenia.';
+            imagesContainer.innerHTML = 'No images found.';
           }
         })
         .catch(error => {
-          console.error('Błąd podczas ładowania obrazków:', error);
+          console.error('Error loading images:', error);
         });
     }
 
