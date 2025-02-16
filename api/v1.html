@@ -154,6 +154,26 @@
     .overlay.active {
       display: flex;
     }
+
+    /* Loading Spinner Styles */
+    #loading-spinner {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #ff66b2;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -165,6 +185,9 @@
     </label>
     <button type="submit">Search ✨</button>
   </form>
+
+  <!-- Loading Spinner -->
+  <div id="loading-spinner"></div>
 
   <div id="images-container"></div>
 
@@ -183,6 +206,9 @@
 
     function loadImages(r18, tags) {
       const apiUrl = buildApiUrl(r18, tags);
+      const loadingSpinner = document.getElementById('loading-spinner');
+      loadingSpinner.style.display = 'block'; // Show loading spinner
+
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -226,9 +252,12 @@
           } else {
             imagesContainer.innerHTML = 'No images found.';
           }
+
+          loadingSpinner.style.display = 'none'; // Hide loading spinner after data is loaded
         })
         .catch(error => {
           console.error('Error loading images:', error);
+          loadingSpinner.style.display = 'none'; // Hide loading spinner in case of an error
         });
     }
 
