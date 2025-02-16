@@ -3,290 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>foreversadboys.ovh</title>
+  <title>Kawaii Image Finder</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', sans-serif;
-      background-color: #ffe6f2;
       margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-      color: #6b4f47;
+      padding: 20px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffdeeb, #ffc0cb);
+      color: #ff69b4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     h1 {
-      color: #ff66b2;
-      font-size: 36px;
-      margin-bottom: 20px;
+      text-align: center;
+      color: #ff1493;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
     }
 
-    #tag-form {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+    .search-box {
       display: flex;
       gap: 10px;
-      align-items: center;
-      background-color: #ffe0f7;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #tag-form input {
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #ff99cc;
-      background-color: #fff8e1;
-      color: #6b4f47;
-    }
-
-    #tag-form button {
-      padding: 12px 20px;
-      background-color: #ff66b2;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    #tag-form button:hover {
-      background-color: #ff3385;
-    }
-
-    .r18-label {
-      font-size: 16px;
-      color: #ff66b2;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-    }
-
-    .r18-label input {
-      margin-right: 10px;
-    }
-
-    #images-container {
-      display: flex;
+      margin-bottom: 20px;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
-      width: 80%;
-      margin-top: 60px;
+      align-items: center;
     }
 
-    .image-card {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    input[type="text"] {
+      padding: 10px;
       width: 300px;
-      padding: 12px;
-      text-align: center;
-      overflow: hidden;
-      border: 2px solid #fcbf77;
+      border: 3px solid #ff69b4;
+      border-radius: 20px;
+      background: #fff0f5;
+      color: #ff1493;
     }
 
-    .image-card img {
-      max-width: 100%;
-      border-radius: 12px;
+    button {
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
       cursor: pointer;
-      transition: transform 0.2s ease-in-out;
+      transition: all 0.3s;
+      font-weight: bold;
     }
 
-    .image-card img:hover {
+    button:hover {
+      background: #ff1493;
       transform: scale(1.05);
     }
 
-    .image-details {
-      margin-top: 10px;
-      color: #6b4f47;
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 15px;
     }
 
-    .image-details span {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .tag-list span {
-      background-color: #fff2d0;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: 12px;
-      color: #f87b99;
-      border: 1px solid #ff8a88;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .gallery img {
       width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(255,105,180,0.2);
+      transition: all 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 8px rgba(255,105,180,0.4);
+    }
+
+    .loading {
       display: none;
       justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      padding: 20px;
     }
 
-    .overlay img {
-      max-width: 90%;
-      max-height: 90%;
+    .error {
+      color: #ff1493;
+      text-align: center;
+      padding: 10px;
+      display: none;
+      background: #fff0f5;
       border-radius: 10px;
     }
 
-    .overlay.active {
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ffc0cb;
+      border-top: 5px solid #ff69b4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .r18-label {
+      color: #ff1493;
       display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .search-box {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to the Forever Sad Boys Gallery</h1>
-  
-  <form id="tag-form">
-    <label class="r18-label">
-      <input type="checkbox" id="r18Check"> Show R18 Content
-    </label>
-    <input type="text" id="tags" name="tags" placeholder="e.g., genshinimpact, hutao">
-    <button type="submit">Search</button>
-  </form>
+  <div class="container">
+    <h1>🍭 Kawaii Image Finder 🌸</h1>
 
-  <div id="images-container">
-  </div>
+    <div class="search-box">
+      <input type="text" id="tagsInput" placeholder="Enter tags (genshinimpact, hutao)">
+      <label class="r18-label">
+        <input type="checkbox" id="r18Check"> R18 Content
+      </label>
+      <button id="searchBtn">Search ✨</button>
+    </div>
 
-  <div class="overlay" id="overlay">
-    <img id="overlay-img" src="" alt="Enlarged Image">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <div id="gallery" class="gallery"></div>
+
+    <div id="error" class="error">Sorry, no images found!</div>
   </div>
 
   <script>
-    function getQueryParams() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const r18 = urlParams.get('r18') || '0'; 
-      const tags = urlParams.getAll('tag');
-      return { r18, tags };
-    }
+    document.getElementById("searchBtn").addEventListener("click", function() {
+      const tags = document.getElementById("tagsInput").value;
+      const isR18 = document.getElementById("r18Check").checked ? 1 : 0;
+      const url = `https://api.foreversadboys.ovh/v1?tags=${tags}&r18=${isR18}`;
 
-    function buildApiUrl(r18, tags) {
-      let url = `https://api.foreversadboys.ovh/v1?r18=${r18}`;
-      tags.forEach(tag => {
-        url += `&tag=${tag}`;
-      });
-      return url;
-    }
+      document.getElementById("loading").style.display = "flex";
+      document.getElementById("gallery").innerHTML = "";
+      document.getElementById("error").style.display = "none";
 
-    function loadImages(r18, tags) {
-      const apiUrl = buildApiUrl(r18, tags);
-      fetch(apiUrl)
+      fetch(url)
         .then(response => response.json())
         .then(data => {
-          const imagesContainer = document.getElementById('images-container');
-          imagesContainer.innerHTML = ''; 
+          document.getElementById("loading").style.display = "none";
 
-          if (data && data.data && Array.isArray(data.data)) {
-            data.data.forEach(image => {
-              const imageCard = document.createElement('div');
-              imageCard.className = 'image-card';
-
-              const imageElement = document.createElement('img');
-              imageElement.src = image.urls.original;
-              imageElement.alt = image.title;
-              imageElement.width = 300;
-              imageElement.onclick = function() {
-                showOverlay(image.urls.original);
-              };
-
-              const detailsDiv = document.createElement('div');
-              detailsDiv.className = 'image-details';
-
-              const authorSpan = document.createElement('span');
-              authorSpan.textContent = `Author: ${image.author || 'Unknown'}`;
-
-              const tagListDiv = document.createElement('div');
-              tagListDiv.className = 'tag-list';
-              image.tags.forEach(tag => {
-                const tagSpan = document.createElement('span');
-                tagSpan.textContent = tag;
-                tagListDiv.appendChild(tagSpan);
-              });
-
-              detailsDiv.appendChild(authorSpan);
-              detailsDiv.appendChild(tagListDiv);
-
-              imageCard.appendChild(imageElement);
-              imageCard.appendChild(detailsDiv);
-              imagesContainer.appendChild(imageCard);
+          if (data.images && data.images.length > 0) {
+            const gallery = document.getElementById("gallery");
+            data.images.forEach(img => {
+              const imgElement = document.createElement("img");
+              imgElement.src = img.url;
+              imgElement.alt = img.description;
+              gallery.appendChild(imgElement);
             });
           } else {
-            imagesContainer.innerHTML = 'No images found.';
+            document.getElementById("error").style.display = "block";
           }
         })
-        .catch(error => {
-          console.error('Error loading images:', error);
+        .catch(() => {
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("error").style.display = "block";
         });
-    }
-
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      const tagsInput = document.getElementById('tags').value;
-      const tags = tagsInput.split(',').map(tag => tag.trim());
-      const { r18 } = getQueryParams();
-      loadImages(r18, tags);
-    }
-
-    function toggleR18Param() {
-      const r18Check = document.getElementById('r18Check');
-      const r18Value = r18Check.checked ? '1' : '0';
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.set('r18', r18Value);
-      window.history.replaceState({}, '', '?' + urlParams.toString());
-    }
-
-    function showOverlay(imageUrl) {
-      const overlay = document.getElementById('overlay');
-      const overlayImg = document.getElementById('overlay-img');
-      overlayImg.src = imageUrl;
-      overlay.classList.add('active');
-    }
-
-    function closeOverlay() {
-      const overlay = document.getElementById('overlay');
-      overlay.classList.remove('active');
-    }
-
-    function init() {
-      const { r18, tags } = getQueryParams();
-      if (tags.length > 0) {
-        loadImages(r18, tags);
-      }
-
-      const form = document.getElementById('tag-form');
-      form.addEventListener('submit', handleFormSubmit);
-
-      const overlay = document.getElementById('overlay');
-      overlay.addEventListener('click', closeOverlay);
-
-      const r18Check = document.getElementById('r18Check');
-      r18Check.checked = r18 === '1';
-      r18Check.addEventListener('change', toggleR18Param);
-    }
-
-    window.onload = init;
+    });
   </script>
 </body>
 </html>
