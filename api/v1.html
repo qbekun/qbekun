@@ -3,242 +3,264 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🍭 Kawaii Image Finder 🌸</title>
+  <title>foreversadboys</title>
   <style>
     body {
+      font-family: 'Comic Sans MS', sans-serif;
+      background-color: #ffebf0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      color: #6b4f47;
       margin: 0;
-      padding: 20px;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(135deg, #ffdeeb, #ffc0cb);
-      color: #ff69b4;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 0;
     }
 
     h1 {
-      text-align: center;
-      color: #ff1493;
-      margin-bottom: 30px;
-      font-size: 2.5em;
-      text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
-    }
-
-    .search-box {
-      display: flex;
-      gap: 10px;
+      color: #ff66b2;
+      font-size: 36px;
       margin-bottom: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
+    }
+
+    #tag-form {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      gap: 15px;
       align-items: center;
+      background-color: #ffe0f7;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    input[type="text"] {
-      padding: 10px;
-      width: 300px;
-      border: 3px solid #ff69b4;
-      border-radius: 20px;
-      background: #fff0f5;
-      color: #ff1493;
+    #tag-form input {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ff99cc;
+      background-color: #fff8e1;
+      color: #6b4f47;
     }
 
-    button {
-      padding: 10px 20px;
-      background: #ff69b4;
+    #tag-form button {
+      padding: 12px 20px;
+      background-color: #ff66b2;
       color: white;
       border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #ff1493;
-      transform: scale(1.05);
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 15px;
-    }
-
-    .gallery-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(255, 105, 180, 0.2);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    .gallery-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 8px rgba(255, 105, 180, 0.4);
-    }
-
-    .loading {
-      display: none;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .error {
-      color: #ff1493;
-      text-align: center;
-      padding: 10px;
-      display: none;
-      background: #fff0f5;
       border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
     }
 
-    /* Modal styles */
-    .modal {
+    #tag-form button:hover {
+      background-color: #ff3385;
+    }
+
+    .r18-label {
+      font-size: 16px;
+      color: #ff66b2;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .r18-label input {
+      margin-right: 10px;
+    }
+
+    #images-container {
       display: flex;
       justify-content: center;
-      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 80%;
+      margin-top: 60px;
+    }
+
+    .image-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 12px;
+      text-align: center;
+      overflow: hidden;
+      border: 2px solid #fcbf77;
+    }
+
+    .image-card img {
+      max-width: 100%;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .image-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .image-details {
+      margin-top: 10px;
+      color: #6b4f47;
+    }
+
+    .image-details span {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .tag-list span {
+      background-color: #fff2d0;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      color: #f87b99;
+      border: 1px solid #ff8a88;
+    }
+
+    .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
       z-index: 1000;
     }
 
-    .modal-content {
-      position: relative;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-img {
-      max-width: 100%;
-      max-height: 80vh;
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
       border-radius: 10px;
     }
 
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #ff1493;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      color: #ff69b4;
+    .overlay.active {
+      display: flex;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🍭 Kawaii Image Finder 🌸</h1>
+  <form id="tag-form">
+    <label for="tags">Tags:</label>
+    <input type="text" id="tags" name="tags" placeholder="e.g., genshinimpact, hutao">
+    <label class="r18-label">
+      <input type="checkbox" id="r18Check"> Show R18 Content
+    </label>
+    <button type="submit">Search</button>
+  </form>
 
-    <div class="search-box">
-      <input type="text" id="tagsInput" placeholder="Enter tags (e.g., hutao)">
-      <label class="r18-label">
-        <input type="checkbox" id="r18Check"> R18 Content
-      </label>
-      <button id="searchBtn">Search ✨</button>
-    </div>
+  <div id="images-container"></div>
 
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-    </div>
-
-    <div class="error" id="error">Sorry, no images found!</div>
-
-    <div class="gallery" id="gallery"></div>
+  <div class="overlay" id="overlay">
+    <img id="overlay-img" src="" alt="Enlarged Image">
   </div>
 
   <script>
-    document.getElementById("searchBtn").addEventListener("click", function() {
-      const tags = document.getElementById("tagsInput").value;
-      const isR18 = document.getElementById("r18Check").checked ? 1 : 0;
-      const url = `https://api.foreversadboys.ovh/v1?tags=${tags}&r18=${isR18}`;
+    function buildApiUrl(r18, tags) {
+      let url = `https://api.foreversadboys.ovh/v1?r18=${r18}`;
+      tags.forEach(tag => {
+        url += `&tag=${tag}`;
+      });
+      return url;
+    }
 
-      document.getElementById("loading").style.display = "flex";
-      document.getElementById("gallery").innerHTML = "";
-      document.getElementById("error").style.display = "none";
-
-      fetch(url)
+    function loadImages(r18, tags) {
+      const apiUrl = buildApiUrl(r18, tags);
+      fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          document.getElementById("loading").style.display = "none";
+          const imagesContainer = document.getElementById('images-container');
+          imagesContainer.innerHTML = '';
 
-          if (data && data.images && data.images.length > 0) {
-            const gallery = document.getElementById("gallery");
-            data.images.forEach(img => {
-              const imgElement = document.createElement("img");
-              imgElement.src = img.url;
-              imgElement.alt = img.description;
-              imgElement.classList.add("gallery-img");
+          if (data && data.data && Array.isArray(data.data)) {
+            data.data.forEach(image => {
+              const imageCard = document.createElement('div');
+              imageCard.className = 'image-card';
 
-              // Add click event to zoom the image
-              imgElement.addEventListener("click", function() {
-                showModal(img.url);
+              const imageElement = document.createElement('img');
+              imageElement.src = image.urls.original;
+              imageElement.alt = image.title;
+              imageElement.width = 300;
+              imageElement.onclick = function() {
+                showOverlay(image.urls.original);
+              };
+
+              const detailsDiv = document.createElement('div');
+              detailsDiv.className = 'image-details';
+
+              const authorSpan = document.createElement('span');
+              authorSpan.textContent = `Author: ${image.author || 'Unknown'}`;
+
+              const tagListDiv = document.createElement('div');
+              tagListDiv.className = 'tag-list';
+              image.tags.forEach(tag => {
+                const tagSpan = document.createElement('span');
+                tagSpan.textContent = tag;
+                tagListDiv.appendChild(tagSpan);
               });
 
-              gallery.appendChild(imgElement);
+              detailsDiv.appendChild(authorSpan);
+              detailsDiv.appendChild(tagListDiv);
+
+              imageCard.appendChild(imageElement);
+              imageCard.appendChild(detailsDiv);
+              imagesContainer.appendChild(imageCard);
             });
           } else {
-            document.getElementById("error").style.display = "block";
+            imagesContainer.innerHTML = 'No images found.';
           }
         })
-        .catch(() => {
-          document.getElementById("loading").style.display = "none";
-          document.getElementById("error").style.display = "block";
+        .catch(error => {
+          console.error('Error loading images:', error);
         });
-    });
-
-    // Show the modal with the larger image
-    function showModal(imgUrl) {
-      const modal = document.createElement("div");
-      modal.classList.add("modal");
-      
-      const modalContent = document.createElement("div");
-      modalContent.classList.add("modal-content");
-      
-      const closeButton = document.createElement("span");
-      closeButton.classList.add("close");
-      closeButton.innerHTML = "&times;";
-
-      const modalImg = document.createElement("img");
-      modalImg.src = imgUrl;
-      modalImg.classList.add("modal-img");
-
-      modalContent.appendChild(closeButton);
-      modalContent.appendChild(modalImg);
-      modal.appendChild(modalContent);
-      
-      document.body.appendChild(modal);
-
-      // Close the modal when the close button is clicked
-      closeButton.addEventListener("click", function() {
-        modal.remove();
-      });
-
-      // Close the modal when clicking outside the image
-      modal.addEventListener("click", function(e) {
-        if (e.target === modal) {
-          modal.remove();
-        }
-      });
     }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const tagsInput = document.getElementById('tags').value;
+      const tags = tagsInput.split(',').map(tag => tag.trim());
+      const r18 = document.getElementById('r18Check').checked ? '1' : '0';
+      loadImages(r18, tags);
+    }
+
+    function showOverlay(imageUrl) {
+      const overlay = document.getElementById('overlay');
+      const overlayImg = document.getElementById('overlay-img');
+      overlayImg.src = imageUrl;
+      overlay.classList.add('active');
+    }
+
+    function closeOverlay() {
+      const overlay = document.getElementById('overlay');
+      overlay.classList.remove('active');
+    }
+
+    function init() {
+      const form = document.getElementById('tag-form');
+      form.addEventListener('submit', handleFormSubmit);
+
+      const overlay = document.getElementById('overlay');
+      overlay.addEventListener('click', closeOverlay);
+    }
+
+    window.onload = init;
   </script>
 </body>
 </html>
