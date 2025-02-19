@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+:root {
+  --pink-accent: #FF69B4;
+  --soft-pink: #FFB6C1;
+  --pastel-background: #FFF0F5;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: var(--pastel-background);
+  color: #333;
+  overflow: hidden;
+}
+
+.entry-overlay {
+  background: rgba(255, 105, 180, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.entry-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.entry-content {
+  text-align: center;
+  color: white;
+}
+
+.entry-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 3px;
+  animation: titleShimmer 3s infinite alternate;
+}
+
+@keyframes titleShimmer {
+  0% { text-shadow: 0 0 10px var(--soft-pink); }
+  100% { text-shadow: 0 0 20px white; }
+}
+
+.enter-btn {
+  background-color: var(--pink-accent);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.enter-btn:hover {
+  background-color: var(--soft-pink);
+  transform: scale(1.05);
+}
+
+.background-video video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.social-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.top-social-menu {
+  top: 20px;
+}
+
+.bottom-social-menu {
+  bottom: 0;
+}
+
+.menu-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 15px;
+}
+
+.link-social {
+  color: var(--pink-accent);
+  font-size: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.link-social:hover {
+  color: var(--soft-pink);
+  transform: scale(1.2) rotate(5deg);
+}
+
+.username-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  z-index: 10;
+}
+
+.top-username-bar {
+  top: 0px; 
+}
+
+.bottom-username-bar {
+  bottom: 35px; 
+}
+
+.username {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: lowercase;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  user-select: none;  
+  -webkit-user-select: none;  
+  -moz-user-select: none;  
+  -ms-user-select: none;  
+  cursor: default;  
+}
+
+.username:hover {
+  opacity: 1;
+}
+
+.local-time {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1500;
+}
+
+.local-time.visible {
+  opacity: 1;
+}
+
+/* 404 Page Specific Styles */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, var(--pink-accent), var(--soft-pink));
+}
+
+.not-found-title {
+  font-size: 8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+  animation: errorShake 1.5s infinite;
+}
+
+.not-found-subtitle {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+.back-home-btn {
+  background-color: white;
+  color: var(--pink-accent);
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.back-home-btn:hover {
+  transform: scale(1.05);
+  background-color: var(--soft-pink);
+  color: white;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@media (max-width: 768px) {
+  .menu-list {
+    gap: 10px;
+  }
+  
+  .link-social {
+    font-size: 1.2rem;
+  }
+  .username {
+    font-size: 0.8rem;
+  }
+}
