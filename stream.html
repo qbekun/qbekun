@@ -1,0 +1,214 @@
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="lolikuza">
+    <meta name="keywords" content="anime, music, streams, lolikuza, backup, anime radio, music stream, qbekun, srtmz, foreversadboys, loli, yakuza, pdf, lolikuza culture, lolikuza community, lolikuza fandom, anime music, anime streaming, backup anime stream, otaku music, loli music, online anime radio, free anime radio, anime fan community, anime music lovers, Japanese music, anime culture, streaming radio, music curation, anime playlist, anime gaming, anime streamers, video games, gaming streams, live streaming, gaming community, otaku gaming, anime game streaming, game culture, online game streaming, competitive gaming, anime fans, anime fandom, anime live stream, cosplay, manga, anime reviews, gaming culture, stream platforms, stream anime, twitch anime, youtube anime, anime stream community, multiplayer games, anime game fans, gaming culture, lolikuza vibes, lolikuza style">
+    <meta name="author" content="qbekun">
+    <meta property="og:title" content="lolikuza">
+    <meta property="og:description" content="lolikuza">
+    <meta property="og:url" content="https://lolikuza.ovh">
+    <meta property="og:image" content="https://lolikuza.ovh/bg.webp">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="lolikuza">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="lolikuza">
+    <meta name="twitter:description" content="lolikuza">
+    <meta name="twitter:image" content="https://lolikuza.ovh/bg.webp">
+    <meta name="theme-color" content="#FF69B4">
+    <title>lolikuza.ovh</title>
+    <link rel="icon" href="https://lolikuza.ovh/1.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fce8ff;
+            color: #ff66c4;
+        }
+        
+        .header {
+            background-color: #ff9ed8;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #ff66c4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #fff;
+            text-shadow: 2px 2px 4px #ff66c4;
+        }
+        
+        .team-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 3px solid #ff66c4;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-count {
+            background-color: white;
+            color: #ff66c4;
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 2px solid #ff66c4;
+            font-weight: bold;
+        }
+        
+        .team-description {
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 15px;
+            border: 3px solid #ff66c4;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stream-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .stream-box {
+            width: 100%;
+            max-width: 800px;
+            border: 3px solid #ff66c4;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 30px;
+        }
+
+        .stream-header {
+            background-color: #ff9ed8;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #ff66c4;
+        }
+
+        .stream-header h3 {
+            margin: 0;
+            color: white;
+            text-shadow: 1px 1px 2px #ff66c4;
+        }
+
+        .stream-frame {
+            width: 100%;
+            height: 480px;
+        }
+
+        .chat-frame {
+            width: 100%;
+            height: 300px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff9ed8;
+            color: white;
+            border-top: 4px solid #ff66c4;
+            margin-top: 30px;
+        }
+
+        .kawaii-corner {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 150px;
+            height: 150px;
+            background-image: url('/api/placeholder/150/150');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            .stream-box {
+                width: 100%;
+            }
+            
+            .stream-frame, .chat-frame {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="team-logo">
+            <img src="https://i.pinimg.com/736x/f2/3b/18/f23b18824569910d4a91282352b097bd.jpg" alt="Team Lolikuza Logo">
+        </div>
+        <h1>lolikuza</h1>
+        <div class="member-count">Członkowie: 2</div>
+    </div>
+
+    <div class="team-description">
+        <h2>🌸 Godzina 🌸</h2>
+        <p id="current-time"></p>
+    </div>
+
+    <div class="stream-container">
+        <div class="stream-box">
+            <div class="stream-header">
+                <h3>qbekun</h3>
+            </div>
+            <iframe class="stream-frame" src="https://player.twitch.tv/?channel=qbekun&parent=lolikuza.ovh" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
+            <iframe class="chat-frame" src="https://www.twitch.tv/embed/qbekun/chat?parent=lolikuza.ovh" frameborder="0"></iframe>
+        </div>
+
+        <div class="stream-box">
+            <div class="stream-header">
+                <h3>srtmz_</h3>
+            </div>
+            <iframe class="stream-frame" src="https://player.twitch.tv/?channel=srtmz_&parent=lolikuza.ovh" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
+            <iframe class="chat-frame" src="https://www.twitch.tv/embed/srtmz_/chat?parent=lolikuza.ovh" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 lolikuza</p>
+        <p>qbekun</p>
+    </div>
+
+    <div class="kawaii-corner"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateTime() {
+                const currentTime = new Date();
+                const hours = currentTime.getHours().toString().padStart(2, '0');
+                const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+                const seconds = currentTime.getSeconds().toString().padStart(2, '0');
+                const timeString = `${hours}:${minutes}:${seconds}`;
+                document.getElementById('current-time').textContent = `Aktualna godzina: ${timeString}`;
+            }
+
+            setInterval(updateTime, 1000);
+            updateTime();
+        });
+    </script>
+</body>
+</html>
