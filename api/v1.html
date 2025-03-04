@@ -238,6 +238,9 @@
               const detailsDiv = document.createElement('div');
               detailsDiv.className = 'image-details';
 
+              const titleSpan = document.createElement('span');
+              titleSpan.textContent = `Title: ${image.title}`;
+
               const authorSpan = document.createElement('span');
               authorSpan.textContent = `Author: ${image.author || 'Unknown'}`;
 
@@ -249,6 +252,7 @@
                 tagListDiv.appendChild(tagSpan);
               });
 
+              detailsDiv.appendChild(titleSpan);
               detailsDiv.appendChild(authorSpan);
               detailsDiv.appendChild(tagListDiv);
 
