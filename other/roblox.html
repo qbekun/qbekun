@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="lolikuza">
+<meta name="keywords" content="anime, music, streams, lolikuza, backup, anime radio, music stream, qbekun, srtmz, foreversadboys, loli, yakuza, pdf, lolikuza culture, lolikuza community, lolikuza fandom, anime music, anime streaming, backup anime stream, otaku music, loli music, online anime radio, free anime radio, anime fan community, anime music lovers, Japanese music, anime culture, streaming radio, music curation, anime playlist, anime gaming, anime streamers, video games, gaming streams, live streaming, gaming community, otaku gaming, anime game streaming, game culture, online game streaming, competitive gaming, anime fans, anime fandom, anime live stream, cosplay, manga, anime reviews, gaming culture, stream platforms, stream anime, twitch anime, youtube anime, anime stream community, multiplayer games, anime game fans, gaming culture, lolikuza vibes, lolikuza style">
+<meta name="author" content="qbekun">
+<meta property="og:title" content="lolikuza">
+<meta property="og:description" content="lolikuza">
+<meta property="og:url" content="https://lolikuza.ovh">
+<meta property="og:image" content="https://lolikuza.ovh/bg.webp">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="lolikuza">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="lolikuza">
+<meta name="twitter:description" content="lolikuza">
+<meta name="twitter:image" content="https://lolikuza.ovh/bg.webp">
+<meta name="theme-color" content="#FF69B4">
+
+    
+    <title>lolikuza.ovh</title>
+	
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <div class="flex items-center justify-center mb-6">
+            <img id="randomLogo" 
+                 alt="Losowe Logo" 
+                 class="w-24 h-24 rounded-full object-cover cursor-pointer hover:opacity-80 transition"
+                 onclick="changeRandomLogo()"
+            >
+        </div>
+        <h1 class="text-2xl font-bold text-center mb-6 text-pink-600">lolikuza</h1>
+        
+        <div id="calculatorForm">
+            <div class="mb-4">
+                <label for="robuxAmount" class="block text-gray-700 mb-2">Liczba Robux:</label>
+                <input 
+                    type="number" 
+                    id="robuxAmount" 
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+                    placeholder="Wpisz liczbę Robux"
+                >
+            </div>
+            
+            <button 
+                onclick="calculatePrice()" 
+                class="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600 transition duration-300"
+            >
+                Oblicz Cenę
+            </button>
+            
+            <div id="result" class="mt-4 text-center font-bold text-green-600"></div>
+            
+            <p class="text-xs text-gray-500 text-center mt-4 italic">
+                * Proszę pamiętać, że robuxy są liczone bez prowizji, więc aby otrzymać 1000 robuxów, należy wpłacić 1429.
+            </p>
+        </div>
+    </div>
+	
+	<script>
+    document.addEventListener("contextmenu", function(event){
+        event.preventDefault();
+    });
+</script>
+
+<script>
+    (function() {
+        const devTools = {
+            open: false,
+            threshold: 160,
+            checkDevTools: function () {
+                const width = window.outerWidth - window.innerWidth > this.threshold;
+                const height = window.outerHeight - window.innerHeight > this.threshold;
+                if (width || height) {
+                    this.open = true;
+                    alert("-__-");
+                }
+            }
+        };
+
+        setInterval(function () {
+            devTools.checkDevTools();
+        }, 1000);
+    })();
+</script>
+
+<script>
+    (function() {
+        const intercept = function () {
+            const log = console.log;
+            console.log = function() {
+                if (arguments[0].indexOf('DevTools') !== -1) return;
+                log.apply(console, arguments);
+            };
+        };
+        intercept();
+    })();
+</script>
+
+
+    <script>
+        const logos = [
+            'https://i.pinimg.com/736x/f7/6b/a4/f76ba407d325306ed680ce429eca5396.jpg',
+            'https://i.pinimg.com/736x/2c/e0/df/2ce0dfb0a554b9dd8bd429715b1ede75.jpg',
+            'https://i.pinimg.com/736x/97/2a/c8/972ac81117d9bcfbe6d8c94a5ec28c9c.jpg',
+            'https://i.pinimg.com/736x/8f/19/50/8f195010f41803c31de8986a0d802fb8.jpg',
+            'https://i.pinimg.com/736x/26/a0/39/26a039b5d31ef72e5a9f51226f49c96c.jpg',
+            'https://i.pinimg.com/736x/07/03/9b/07039b4077941fe129a7ceb7da11a77b.jpg'
+        ];
+
+        function getRandomLogo() {
+            return logos[Math.floor(Math.random() * logos.length)];
+        }
+
+        function changeRandomLogo() {
+            const logoImg = document.getElementById('randomLogo');
+            logoImg.src = getRandomLogo();
+        }
+
+        // Set initial random logo when page loads
+        window.onload = function() {
+            const logoImg = document.getElementById('randomLogo');
+            logoImg.src = getRandomLogo();
+        }
+
+        function calculatePrice(basePrice = 40, feePercentage = 1.9, robuxAmount = 1429) {
+            const targetAmount = document.getElementById('robuxAmount').value;
+            
+            if (!targetAmount || isNaN(targetAmount) || targetAmount <= 0) {
+                document.getElementById('result').textContent = 'Proszę wprowadzić poprawną liczbę Robux.';
+                return;
+            }
+
+            // Calculate base price before fee
+            const calculatedBasePrice = basePrice / (1 + (feePercentage / 100));
+            
+            // Calculate price per Robux
+            const pricePerRobux = calculatedBasePrice / robuxAmount;
+            
+            // Calculate final price
+            const finalPrice = pricePerRobux * targetAmount;
+            const priceWithFee = finalPrice * (1 + (feePercentage / 100));
+            
+            document.getElementById('result').textContent = 
+                `Cena za ${targetAmount} Robux: ${priceWithFee.toFixed(2)} zł`;
+        }
+    </script>
+</body>
+</html>
