@@ -132,7 +132,7 @@
             logoImg.src = getRandomLogo();
         }
 
-        function calculatePrice(basePrice = 40, feePercentage = 1.9, robuxAmount = 1429) {
+        function calculatePrice(basePrice = 30, feePercentage = 1.9, robuxAmount = 1429) {
             const targetAmount = document.getElementById('robuxAmount').value;
             
             if (!targetAmount || isNaN(targetAmount) || targetAmount <= 0) {
