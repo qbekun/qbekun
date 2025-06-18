@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const avatarUrl = userData.avatar && userData.avatar.link 
             ? userData.avatar.link
-            : `https://cdn.discordapp.com/embed/avatars/0.png`;
+            : `https://cdn.discordapp.com/avatars/616018262890905611/98410d5da478f0e88f055791f1617e6e.webp?size=512`;
         
         if (avatar) avatar.src = avatarUrl;
         if (mainAvatar) mainAvatar.src = avatarUrl;
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const status = document.getElementById('discord-status');
         const activity = document.getElementById('discord-activity');
         
-        const defaultAvatar = 'https://cdn.discordapp.com/embed/avatars/0.png';
+        const defaultAvatar = 'https://cdn.discordapp.com/avatars/616018262890905611/98410d5da478f0e88f055791f1617e6e.webp?size=512';
         if (avatar) avatar.src = defaultAvatar;
         if (mainAvatar) mainAvatar.src = defaultAvatar;
         
