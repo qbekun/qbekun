@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const CONFIG = {
-        DISCORD_USER_ID: '1384985831336444006',
+        DISCORD_USER_ID: '616018262890905611',
         SPOTIFY_CLIENT_ID: '98b5d8832bc041b4b59af871bfd8ee37',
         DISCORD_BOT_TOKEN: null,
         UPDATE_INTERVAL: 30000,
