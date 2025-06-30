@@ -1,266 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="lolikuza manga reader">
-  <meta name="keywords" content="manga, anime, lolikuza, pdf reader">
-  <meta name="author" content="qbekun">
-  <meta property="og:title" content="lolikuza manga">
-  <meta property="og:description" content="Read manga in lolikuza style">
-  <meta property="og:url" content="https://lolikuza.ovh/manga.html">
-  <meta property="og:image" content="https://lolikuza.ovh/bg.webp">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#FF69B4">
-  <title>lolikuza.ovh | manga</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lolikuza manga reader" />
+  <meta name="keywords" content="manga, anime, lolikuza, pdf" />
+  <meta name="author" content="qbekun" />
+  <meta property="og:title" content="lolikuza manga" />
+  <meta property="og:description" content="Read manga in lolikuza style" />
+  <meta property="og:url" content="https://lolikuza.ovh/manga.html" />
+  <meta property="og:image" content="https://lolikuza.ovh/bg.webp" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#FF69B4" />
 
-  <link rel="icon" href="https://lolikuza.ovh/1.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/uwu.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>lolikuza.ovh | Manga</title>
+  <link rel="icon" href="https://lolikuza.ovh/1.png" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
+    /* Reset & base */
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #1a1a1a;
-      color: white;
+      background: #111;
+      color: #fff;
+      overflow-x: hidden;
     }
 
+    /* Username bars */
     .username-bar {
       text-align: center;
-      padding: 5px;
+      padding: 0.5rem;
       background: rgba(255, 105, 180, 0.2);
-      font-weight: bold;
+      font-weight: 600;
     }
 
+    /* Background video */
     .background-video video {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       z-index: -1;
     }
 
+    /* Manga grid */
     .manga-container {
-      padding: 2rem;
       max-width: 1200px;
-      margin: auto;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
-
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
     .manga-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
+      grid-gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
-
     .manga-card {
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
+      border-radius: 12px;
       overflow: hidden;
-      transition: 0.3s;
       cursor: pointer;
-      backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(8px);
     }
-
     .manga-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     }
-
     .manga-cover {
-      height: 300px;
       width: 100%;
+      height: 250px;
       object-fit: cover;
-    }
-
-    .manga-info {
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .pdf-viewer-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.95);
-      display: none;
-      flex-direction: column;
+      background: #222;
+      display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      font-size: 1.2rem;
+      color: #eee;
+    }
+    .manga-info {
+      padding: 0.8rem;
+      text-align: center;
     }
 
+    /* PDF viewer modal */
+    .pdf-viewer-container {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      padding: 2rem;
+    }
     .pdf-viewer {
       width: 90%;
       height: 80%;
-      border-radius: 10px;
       border: none;
+      border-radius: 8px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
     }
-
     .close-viewer {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #FF69B4;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: #FF69B4;
       border: none;
       border-radius: 20px;
-      color: white;
-      font-weight: bold;
+      color: #fff;
+      font-size: 1rem;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
-
     .close-viewer:hover {
-      background-color: #ff85c1;
+      background: #ff85c1;
       transform: scale(1.05);
     }
 
+    /* Social menu */
     .social-menu {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 1rem;
+      right: 1rem;
       z-index: 10;
     }
-
     .menu-list {
+      display: flex;
+      gap: 1rem;
       list-style: none;
       padding: 0;
-      display: flex;
-      gap: 15px;
+      margin: 0;
     }
-
-    .link-social i {
-      color: white;
+    .menu-list a {
+      color: #fff;
       font-size: 1.5rem;
     }
 
+    /* Loading */
     .loading {
       text-align: center;
       font-size: 1.2rem;
-      color: white;
-      padding: 2rem;
+      padding: 2rem 0;
     }
 
-    @media (max-width: 768px) {
-      .manga-cover {
-        height: 200px;
-      }
+    @media (max-width: 576px) {
+      .manga-cover { height: 180px; }
     }
   </style>
 </head>
 <body>
+  <!-- Aux bars -->
   <div class="username-bar">qbekun</div>
 
+  <!-- Background video -->
   <div class="background-video">
     <video autoplay loop muted playsinline>
-      <source src="https://lolikuza.ovh/assets/video/senpai.mp4" type="video/mp4">
+      <source src="https://lolikuza.ovh/assets/video/senpai.mp4" type="video/mp4" />
     </video>
   </div>
 
+  <!-- Manga grid container -->
   <div class="manga-container">
     <h1 class="section-title">lolikuza manga collection</h1>
-    <div class="loading" id="loading"><i class="fas fa-spinner fa-spin"></i> Loading manga...</div>
+    <div class="loading" id="loading">
+      <i class="fas fa-spinner fa-spin"></i>&nbsp;Loading manga...
+    </div>
     <div class="manga-grid" id="manga-grid"></div>
   </div>
 
-  <div class="pdf-viewer-container" id="pdf-viewer-container">
-    <iframe class="pdf-viewer" id="pdf-viewer"></iframe>
-    <button class="close-viewer" id="close-viewer">Close Reader</button>
+  <!-- PDF modal -->
+  <div class="pdf-viewer-container" id="pdf-viewer-container" aria-hidden="true">
+    <iframe class="pdf-viewer" id="pdf-viewer" title="Manga Reader"></iframe>
+    <button class="close-viewer" id="close-viewer" aria-label="Close reader">Close</button>
   </div>
 
+  <!-- Social menu -->
   <nav class="social-menu">
     <ul class="menu-list">
-      <li><a href="https://www.youtube.com/@qbekun" class="link-social"><i class="fab fa-youtube"></i></a></li>
-      <li><a href="index.html" class="link-social"><i class="fas fa-home"></i></a></li>
+      <li><a href="https://www.youtube.com/@qbekun" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+      <li><a href="index.html" aria-label="Home"><i class="fas fa-home"></i></a></li>
     </ul>
   </nav>
 
+  <div class="username-bar">srtmz</div>
+
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-  <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
 
-    const mangaFiles = [
-      "assets/mangapdf/Takanashi_Hoshino630.pdf"
-    ];
+  const mangaFiles = [
+    "assets/mangapdf/1.pdf"
+  ];
 
-    const mangaGrid = document.getElementById('manga-grid');
-    const loadingElement = document.getElementById('loading');
-    const pdfViewerContainer = document.getElementById('pdf-viewer-container');
-    const pdfViewer = document.getElementById('pdf-viewer');
-    const closeViewer = document.getElementById('close-viewer');
+  const r18MangaFiles = [
+    "assets/mangapdf/Takanashi_Hoshino630.pdf"
+  ];
 
-    function getFileName(path) {
-      return path.split('/').pop().split('.')[0].replace(/_/g, ' ');
+  const dom = {
+    grid: document.getElementById('manga-grid'),
+    loader: document.getElementById('loading'),
+    modal: document.getElementById('pdf-viewer-container'),
+    viewer: document.getElementById('pdf-viewer'),
+    close: document.getElementById('close-viewer')
+  };
+
+  function getTitle(path) {
+    return path.split('/').pop().replace(/_/g, ' ').replace('.pdf', '');
+  }
+
+  async function renderCover(url) {
+    try {
+      const pdf = await pdfjsLib.getDocument(url).promise;
+      const page = await pdf.getPage(1);
+      const viewport = page.getViewport({ scale: 0.5 });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+      return canvas.toDataURL();
+    } catch (e) {
+      console.warn('Cover fallback:', e);
+      return null;
     }
+  }
 
-    async function generateCover(pdfUrl) {
-      try {
-        const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
-        const page = await pdf.getPage(1);
-        const viewport = page.getViewport({ scale: 0.5 });
-        const canvas = document.createElement('canvas');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-        return canvas.toDataURL('image/jpeg');
-      } catch (err) {
-        console.error('Cover error:', err);
-        return null;
+  async function createCard(file) {
+    const title = getTitle(file);
+    const cover = await renderCover(file);
+    const card = document.createElement('div');
+    card.className = 'manga-card';
+    card.innerHTML = `
+      ${cover
+        ? `<img src="${cover}" class="manga-cover" alt="${title} cover">`
+        : `<div class="manga-cover">${title}</div>`
       }
+      <div class="manga-info">
+        <h2 class="manga-title">${title}</h2>
+      </div>
+    `;
+    card.onclick = () => openModal(file);
+    return card;
+  }
+
+  function openModal(url) {
+    dom.viewer.src = url;
+    dom.modal.style.display = 'flex';
+    dom.modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    dom.viewer.src = '';
+    dom.modal.style.display = 'none';
+    dom.modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = 'auto';
+  }
+
+  dom.close.onclick = closeModal;
+  dom.modal.onclick = e => {
+    if (e.target === dom.modal) closeModal();
+  };
+
+  async function loadAll() {
+    for (const file of mangaFiles) {
+      dom.grid.appendChild(await createCard(file));
+    }
+    dom.loader.style.display = 'none';
+  }
+
+  loadAll();
+
+  // 🔞 Sekcja r18
+  let secretInput = '';
+  let r18Loaded = false;
+
+  document.addEventListener('keydown', (e) => {
+    secretInput += e.key.toLowerCase();
+    if (secretInput.length > 3) {
+      secretInput = secretInput.slice(-3);
     }
 
-    async function createMangaCard(pdfPath) {
-      const title = getFileName(pdfPath);
-      const coverUrl = await generateCover(pdfPath);
-
-      const card = document.createElement('div');
-      card.className = 'manga-card';
-      card.innerHTML = `
-        ${coverUrl ? `<img src="${coverUrl}" class="manga-cover" alt="${title}">` : `<div class="manga-cover">${title}</div>`}
-        <div class="manga-info">
-          <div class="manga-title">${title}</div>
-        </div>`;
-
-      card.onclick = () => openPdfViewer(pdfPath);
-      return card;
+    if (secretInput === 'r18' && !r18Loaded) {
+      r18Loaded = true;
+      loadR18();
     }
+  });
 
-    function openPdfViewer(pdfPath) {
-      pdfViewer.src = pdfPath;
-      pdfViewerContainer.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+  async function loadR18() {
+    const divider = document.createElement('h2');
+    divider.textContent = '🔞 +18 manga unlocked';
+    divider.style.textAlign = 'center';
+    divider.style.marginTop = '2rem';
+    divider.style.color = '#ff69b4';
+    dom.grid.parentElement.insertBefore(divider, dom.grid.nextSibling);
+
+    for (const file of r18MangaFiles) {
+      dom.grid.appendChild(await createCard(file));
     }
-
-    closeViewer.onclick = () => {
-      pdfViewer.src = '';
-      pdfViewerContainer.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    };
-
-    pdfViewerContainer.onclick = e => {
-      if (e.target === pdfViewerContainer) closeViewer.click();
-    };
-
-    async function loadManga() {
-      for (const file of mangaFiles) {
-        const card = await createMangaCard(file);
-        mangaGrid.appendChild(card);
-      }
-      loadingElement.style.display = 'none';
-    }
-
-    loadManga();
-  </script>
+  }
+</script>
 </body>
 </html>
