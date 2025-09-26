@@ -9,9 +9,10 @@
     *{box-sizing:border-box}
     body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#071126 0%, #071726 100%); color:var(--text); display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
     .app{width:100%;max-width:560px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
     h1{font-size:20px;margin:0}
-    .controls{display:flex;gap:8px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    input{padding:6px 8px;border-radius:6px;border:1px solid #333;background:#1a2233;color:white}
     button{background:var(--accent);border:0;padding:8px 12px;border-radius:8px;color:white;font-weight:600;cursor:pointer}
     button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06)}
     .board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:rgba(255,255,255,0.02);padding:18px;border-radius:12px}
@@ -21,8 +22,6 @@
     .cell.marked{background:linear-gradient(180deg,var(--accent),#5b21b6);color:white}
     .cell.marked::after{content:'X';position:absolute;right:8px;top:6px;font-weight:800;font-size:20px;opacity:.95}
     .cell.win{outline:4px solid rgba(124,58,237,0.18);box-shadow:0 6px 24px rgba(124,58,237,0.14)}
-    footer{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
-    .small{font-size:13px;color:rgba(230,237,243,0.7)}
   </style>
 </head>
 <body>
@@ -30,6 +29,8 @@
     <header>
       <h1>Bingo - Goku</h1>
       <div class="controls">
+        <input id="session" placeholder="Kod binga (np. 123)" />
+        <button id="apply">Zastosuj</button>
         <button id="shuffle">Losuj</button>
         <button id="reset" class="secondary">Reset</button>
       </div>
@@ -41,36 +42,37 @@
 
   <script>
     const phrases = [
-      "Pokaż clipów",
-      "Robienie clipa",
-      "Internet",
-      "Jestem chujowy",
-      "Lagi",
-      "Chodź tutaj (leczenie)",
-      "cum (leczenie)",
-      "Kampii",
-      "Członek rodziny wbija do pokoju",
-      "Piję wodę",
-      "Czarnuch",
-      "Mute",
-      "Wyjebka za 0",
-      "Wyzywanie ludzi",
-      "Ragebait",
-      "Jedzenie",
-      "Strzelanie z daleka",
-      "Crack",
-      "Ping"
+      "Pokaż clipów","Robienie clipa","Internet","Jestem chujowy","Lagi",
+      "Chodź tutaj (leczenie)","Cum (leczenie)","Kampii","Członek rodziny wbija do pokoju",
+      "Piję wodę","Czarnuch","Mute","Wyjebka za 0","Wyzywanie ludzi",
+      "Ragebait","Jedzenie","Strzelanie z daleka","Crack","Ping"
     ];
 
     const boardEl = document.getElementById('board');
     const shuffleBtn = document.getElementById('shuffle');
     const resetBtn = document.getElementById('reset');
+    const applyBtn = document.getElementById('apply');
+    const sessionInput = document.getElementById('session');
+
+    // prosta funkcja pseudo-losowa zależna od seeda
+    function seededRandom(seed) {
+      let x = Math.sin(seed++) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function randomPickSeed(arr, n, seed){
+      const copy = arr.slice();
+      for(let i = copy.length - 1; i > 0; i--){
+        const j = Math.floor(seededRandom(seed+i) * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy.slice(0, n);
+    }
 
     function makeCell(text, idx){
       const el = document.createElement('div');
       el.className = 'cell';
       el.tabIndex = 0;
-      el.dataset.idx = idx;
       const t = document.createElement('div');
       t.className = 'text';
       t.textContent = text;
@@ -80,21 +82,7 @@
         el.classList.toggle('marked');
         checkWin();
       });
-      el.addEventListener('keydown', (e)=>{
-        if(e.key === ' ' || e.key === 'Enter'){
-          e.preventDefault(); el.click();
-        }
-      });
       return el;
-    }
-
-    function randomPick(arr, n){
-      const copy = arr.slice();
-      for(let i = copy.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy.slice(0, n);
     }
 
     function fillBoardWith(arr){
@@ -106,17 +94,9 @@
     }
 
     function checkWin(){
-      // highlight full row/col/diag if all 3 marked
       const cells = Array.from(boardEl.children);
-      // clear previous wins
       cells.forEach(c=>c.classList.remove('win'));
-
-      const idxPairs = [
-        [0,1,2],[3,4,5],[6,7,8], // rows
-        [0,3,6],[1,4,7],[2,5,8], // cols
-        [0,4,8],[2,4,6] // diags
-      ];
-
+      const idxPairs = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
       idxPairs.forEach(group=>{
         if(group.every(i => cells[i] && cells[i].classList.contains('marked'))){
           group.forEach(i=>cells[i].classList.add('win'));
@@ -125,18 +105,22 @@
     }
 
     shuffleBtn.addEventListener('click', ()=>{
-      const picks = randomPick(phrases, 9);
+      const picks = randomPickSeed(phrases, 9, Date.now());
       fillBoardWith(picks);
     });
 
     resetBtn.addEventListener('click', ()=>{
-      const cells = Array.from(boardEl.children);
-      cells.forEach(c=>{c.className='cell';});
+      Array.from(boardEl.children).forEach(c=>{c.className='cell';});
     });
 
-    // initialize on load
+    applyBtn.addEventListener('click', ()=>{
+      const seed = parseInt(sessionInput.value) || 1;
+      const picks = randomPickSeed(phrases, 9, seed);
+      fillBoardWith(picks);
+    });
+
     (function init(){
-      const picks = randomPick(phrases, 9);
+      const picks = randomPickSeed(phrases, 9, 1);
       fillBoardWith(picks);
     })();
   </script>
