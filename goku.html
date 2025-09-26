@@ -68,7 +68,7 @@
       return copy.slice(0, n);
     }
 
-    function makeCell(text, idx){
+    function makeCell(text){
       const el = document.createElement('div');
       el.className = 'cell';
       el.tabIndex = 0;
@@ -76,7 +76,6 @@
       t.className = 'text';
       t.textContent = text;
       el.appendChild(t);
-
       el.addEventListener('click', ()=>{
         el.classList.toggle('marked');
         checkWin();
@@ -88,7 +87,7 @@
       boardEl.innerHTML = '';
       for(let i=0;i<9;i++){
         const text = arr[i] || '';
-        boardEl.appendChild(makeCell(text, i));
+        boardEl.appendChild(makeCell(text));
       }
     }
 
@@ -103,9 +102,18 @@
       });
     }
 
-    shuffleBtn.addEventListener('click', ()=>{
-      const picks = randomPickSeed(phrases, 9, Date.now());
+    function applySeed(seed){
+      const picks = randomPickSeed(phrases, 9, seed);
       fillBoardWith(picks);
+      sessionInput.value = seed;
+      const url = new URL(window.location);
+      url.searchParams.set("seed", seed);
+      window.history.replaceState({}, "", url);
+    }
+
+    shuffleBtn.addEventListener('click', ()=>{
+      const newSeed = Math.floor(Math.random() * 1e9);
+      applySeed(newSeed);
     });
 
     resetBtn.addEventListener('click', ()=>{
@@ -114,13 +122,13 @@
 
     applyBtn.addEventListener('click', ()=>{
       const seed = parseInt(sessionInput.value) || 1;
-      const picks = randomPickSeed(phrases, 9, seed);
-      fillBoardWith(picks);
+      applySeed(seed);
     });
 
     (function init(){
-      const picks = randomPickSeed(phrases, 9, 1);
-      fillBoardWith(picks);
+      const urlParams = new URLSearchParams(window.location.search);
+      const seed = parseInt(urlParams.get("seed")) || 1;
+      applySeed(seed);
     })();
   </script>
 </body>
