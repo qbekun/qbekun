@@ -7,7 +7,7 @@
 ## 🌐 Socials:
 [![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/hXrG3jjwWS) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/qbekun) [![TikTok](https://img.shields.io/badge/TikTok-%23000000.svg?logo=TikTok&logoColor=white)](https://tiktok.com/@qbekun) [![Twitch](https://img.shields.io/badge/Twitch-%239146FF.svg?logo=Twitch&logoColor=white)](https://twitch.tv/qbekun) [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/qbekun) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@qbekun) 
 
-[![Discord Presence](https://lanyard.cnrad.dev/api/616018262890905611)](https://discord.com/users/616018262890905611)
+[![Discord Presence](https://discord.c99.nl/widget/theme-4/616018262890905611.png)](https://discord.com/users/616018262890905611)
 
 ## **🧋Cutie Counter**
 <a href="https://discord.com/users/616018262890905611"><img align="right" width=400 src="https://count.getloli.com/get/@qbekun?theme=rule34"></a>
